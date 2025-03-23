@@ -1,26 +1,24 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from tickets.models import Ticket 
+from gestion_tk.models import Ticket 
 
 class ReportesTicketsView(APIView):
     def get(self, request):
         # Inicializar contadores
         estados = {
-            'resueltos': 0,
-            'pendientes': 0,
-            'en_progreso': 0
+            'PENDIENTE': 0,
+            'EN_PROGRESO': 0,
+            'RESUELTO': 0
         }
         categorias = {
-            'hardware': 0,
-            'software': 0,
-            'red': 0,
-            'accesos': 0,
-            'dispositivos': 0
+            'HARDWARE': 0,
+            'SOFTWARE': 0,
+            'PERIFERICO': 0,
         }
         
         # Obtener todos los tickets
-        tickets = Ticket.objects.all()
+        tickets = Ticket.objects.all() 
         
         # Contar los tickets por estado y categoría
         for ticket in tickets:
